@@ -88,7 +88,7 @@ func doSomeSting(data string) {
             }
 	    }
 
-	    // 去除第一位"|"
+	    // 去除第一位"|",否则无法执行
 	    log.Info.Println("motion = ",motion[1:len(motion)])
 
     	if err := hexabody.TranslateCommands(motion[1:len(motion)]); err != nil {
