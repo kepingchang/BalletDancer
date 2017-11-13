@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>BalletDancer</title>
+		<script type="text/javascript" src="mind-framework.js"></script>
+		<script type="text/javascript">
+			mind.init({callback: function(robot){
+				skillID="BalletDancer";
+				robot.connectSkill({
+					skillID: skillID
+				});
+
+				// 开始
+				document.getElementById("start_button").onclick = function() {
+					robot.sendData({
+						skillID: skillID, 
+						data: document.getElementById('screenName').value
+					})
+				}
+
+				// 结束
+				document.getElementById("stop_button").onclick = function() {
+					robot.sendData({
+						skillID: skillID, 
+						data: "stop"
+					})
+				}
+			}});
+
+
+
+		// text
+        function jsq(num) {
+            document.getElementById('screenName').value += document.getElementById(num).value;
+        }
+
+        function clearNum() {
+            //清0
+            document.getElementById("screenName").value = null;
+            document.getElementById("screenName").focus();
+        }
+        function tuiGe() {
+            //退格
+            var arr = document.getElementById("screenName");
+            arr.value = arr.value.substring(0, arr.value.length - 1);
+        }
+
+    	</script>
+	</head>
+	
+	<body>
+		<header id="header" class="header">
+				<h3>BalletDancer</h3>
+				<label>HEXA将会按照您的选择顺序跳舞</label>
+		</header>
+
+
+        <!--screen输入栏-->
+        <br/>
+        <input type="text" id="screenName" name="screenName">
+
+        <!-- j -->
+        <br/>
+        <br/>
+
+        <!--第一排-->
+        <input type="button" id="A" onclick="jsq(this.id)" value="A" class="buttons">
+        <input type="button" id="B" onclick="jsq(this.id)" value="B" class="buttons">
+        <input type="button" id="C" onclick="jsq(this.id)" value="C" class="buttons">
+
+        <!--第二排-->
+        <br/>
+        <input type="button" id="D" onclick="jsq(this.id)" value="D" class="buttons">
+        <input type="button" id="E" onclick="jsq(this.id)" value="E" class="buttons">
+        <input type="button" id="F" onclick="jsq(this.id)" value="F" class="buttons">
+        <!--第三排-->
+        <br/>
+        <input type="button" id="G" onclick="jsq(this.id)" value="G" class="buttons">
+        <input type="button" id="H" onclick="jsq(this.id)" value="H" class="buttons">
+        <input type="button" id="I" onclick="jsq(this.id)" value="I" class="buttons">
+        <!--第四排-->
+        
+        <br/>
+        <input type="button" id="Back" onclick="tuiGe()" value="<-" class="buttons">
+        <input type="button" id="Clear" onclick="clearNum()" value="Clear" class="buttons" style="margin-right:0px">
+ 
+		<!-- tiptoe head reset -->
+    	<br/>
+    	<br/>
+
+		<button id="start_button">Start</button>
+		<button id="stop_button">Stop</button>
+	</body>
+</html>
