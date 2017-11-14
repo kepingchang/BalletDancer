@@ -4,16 +4,20 @@ import (
 	"mind/core/framework/skill"
 	"mind/core/framework/log"
 	"mind/core/framework/drivers/hexabody"
+    "strings"
 )
 
 type  BalletDancer struct {
 	skill.Base
+    aaa chan bool
 }
 
 func NewSkill() skill.Interface {
 	// Use this method to create a new skill.
+    return &BalletDancer{
+        aaa:    make(chan bool,0),
+    }
 
-	return & BalletDancer{}
 }
 
 func (d * BalletDancer) OnStart() {
@@ -40,15 +44,19 @@ func (d * BalletDancer) OnRecvString(data string) {
 
 	log.Info.Println("Skill received", len(data), " bytes command", data)
 
-	doSomeSting(data)
+	d.doSomeSting(data)
 
 	log.Info.Println("Exceute finished.")
 }
 
-func doSomeSting(data string) {
+
+func (d * BalletDancer) doSomeSting(data string) {
+
 
 	if data == "stop" {
-		hexabody.Close()
+        log.Info.Println(d.aaa)
+        d.aaa <- true
+        log.Info.Println(d.aaa)
 	}else {
 		hexabody.Start()
     	var arabesque = "|V0A90V1A10V2A145V3A90V4A81V5A133V6A90V7A10V8A145V9A90V10A81V11A133V12A90V13A10V14A145V15A90V16A81V17A133V18A0T500|V0A90V1A81V2A57V3A90V4A65V5A150V6A90V7A81V8A57V9A90V10A65V11A150V12A90V13A81V14A57V15A90V16A65V17A150V18A0T500|V0A90V1A81V2A57V3A90V4A81V5A133V6A90V7A81V8A57V9A90V10A81V11A133V12A90V13A10V14A45V15A90V16A81V17A133V18A0T1000|V0A90V1A65V2A150V3A90V4A65V5A150V6A90V7A65V8A150V9A90V10A65V11A150V12A90V13A65V14A150V15A90V16A65V17A150V18A0T500|V0A90V1A81V2A133V3A90V4A10V5A145V6A90V7A81V8A133V9A90V10A10V11A145V12A90V13A81V14A133V15A90V16A10V17A145V18A0T500|V0A90V1A65V2A150V3A90V4A81V5A57V6A90V7A65V8A150V9A90V10A81V11A57V12A90V13A65V14A150V15A90V16A81V17A57V18A0T500|V0A90V1A81V2A133V3A90V4A81V5A57V6A90V7A81V8A133V9A90V10A10V11A45V12A90V13A81V14A133V15A90V16A81V17A57V18A0T1000"
@@ -90,9 +98,24 @@ func doSomeSting(data string) {
 
 	    // 去除第一位"|",否则无法执行
 	    log.Info.Println("motion = ",motion[1:len(motion)])
+        // 分割所有的动作
+        commands := strings.Split(motion[1:len(motion)], "|")
 
-    	if err := hexabody.TranslateCommands(motion[1:len(motion)]); err != nil {
-		    log.Error.Println("Exceute error:", err)
-	    }
+        log.Info.Println(len(commands))
+
+
+        for _, command := range commands {
+
+            select {
+            case <- d.aaa:
+                log.Info.Println("motion stop!")
+                hexabody.stand()
+                return
+            default:
+                if err := hexabody.TranslateCommands(command); err != nil {
+                    log.Error.Println("Exceute error:", err)
+                }
+            }
+        }
 	}
 }
