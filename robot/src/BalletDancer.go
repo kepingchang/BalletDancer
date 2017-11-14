@@ -100,9 +100,8 @@ func (d * BalletDancer) doSomeSting(data string) {
 	    log.Info.Println("motion = ",motion[1:len(motion)])
         // 分割所有的动作
         commands := strings.Split(motion[1:len(motion)], "|")
-
+        // 打印len
         log.Info.Println(len(commands))
-
 
         for _, command := range commands {
 
