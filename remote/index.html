@@ -31,7 +31,7 @@
 
 		// text
         function jsq(num) {
-            document.getElementById('screenName').value += document.getElementById(num).value;
+            document.getElementById('screenName').value += document.getElementById(num).id;
         }
 
         function clearNum() {
@@ -67,30 +67,32 @@
         <!-- j -->
         <br/>
         <br/>
-
-        <!--第一排-->
-        <input style="background-color: gray;color: white" type="button" id="A" onclick="jsq(this.id)" value="A" class="buttons">
-        <input style="background-color: gray;color: white" type="button" id="B" onclick="jsq(this.id)" value="B" class="buttons">
-        <input style="background-color: gray;color: white" type="button" id="C" onclick="jsq(this.id)" value="C" class="buttons">
-
-        <!--第二排-->
-        <br/>
-        <input style="background-color: gray;color: white" type="button" id="D" onclick="jsq(this.id)" value="D" class="buttons">
-        <input style="background-color: gray;color: white" type="button" id="E" onclick="jsq(this.id)" value="E" class="buttons">
-        <input style="background-color: gray;color: white" type="button" id="F" onclick="jsq(this.id)" value="F" class="buttons">
-        <!--第三排-->
-        <br/>
-        <input style="background-color: gray;color: white" type="button" id="G" onclick="jsq(this.id)" value="G" class="buttons">
-        <input style="background-color: gray;color: white" type="button" id="H" onclick="jsq(this.id)" value="H" class="buttons">
-        <input style="background-color: gray;color: white" type="button" id="I" onclick="jsq(this.id)" value="I" class="buttons">
-        <!--第四排-->
         
-        <br/>
-        <input style="background-color: gray;color: white" type="button" id="Back" onclick="tuiGe()" value="<-" class="buttons">
-        <input style="background-color: gray;color: white" type="button" id="Clear" onclick="clearNum()" value="Clear" class="buttons" style="margin-right:0px">
- 
- 
-		<!-- tiptoe head reset -->
+        <table border="1">
+            <tr>
+                <td><input style="background-color: gray;color: white" type="button" id="A" onclick="jsq(this.id)" value="Arabesque" class="buttons"></td>
+                <td><input style="background-color: gray;color: white" type="button" id="B" onclick="jsq(this.id)" value="Battement" class="buttons"></td>
+                <td><input style="background-color: gray;color: white" type="button" id="E" onclick="jsq(this.id)" value="Ecarte" class="buttons"></td>
+            </tr>
+            
+            <tr>
+                <td><input style="background-color: gray;color: white" type="button" id="G" onclick="jsq(this.id)" value="Gateway" class="buttons"></td>
+                <td><input style="background-color: gray;color: white" type="button" id="J" onclick="jsq(this.id)" value="Jete" class="buttons"></td>
+                <td><input style="background-color: gray;color: white" type="button" id="O" onclick="jsq(this.id)" value="Ouverte" class="buttons"></td>
+            </tr>
+            
+            <tr>
+                <td><input style="background-color: gray;color: white" type="button" id="P" onclick="jsq(this.id)" value="Plie" class="buttons"></td>
+                <td><input style="background-color: gray;color: white" type="button" id="R" onclick="jsq(this.id)" value="Releve" class="buttons"></td>
+                <td><input style="background-color: gray;color: white" type="button" id="S" onclick="jsq(this.id)" value="Saute" class="buttons"></td>
+            </tr>
+            
+            <tr>
+                <td><input style="background-color: gray;color: white" type="button" id="Back" onclick="tuiGe()" value="<-" class="buttons"></td>
+                <td><input style="background-color: gray;color: white" type="button" id="Clear" onclick="clearNum()" value="Clear" class="buttons" style="margin-right:0px"></td>
+            </tr>
+        </table>
+        
     	<br/>
     	<br/>
 
